@@ -1,6 +1,7 @@
 """Attempting to find bugs in Avalara API."""
 
 from client import AvataxClient
+import os
 
 
 def create_client():
@@ -14,7 +15,7 @@ def create_client():
     Return example_client.
     """
     example_client = AvataxClient('codefellowsTestApp', 'ver 0.0', 'test machine')
-    example_client.add_credentials('ted+codefellows@spence.net', '4C87ABA1091')
+    example_client.add_credentials(os.environ.get('USERNAME'), os.environ.get('PASSWORD'))
     return example_client
 
 
@@ -49,15 +50,15 @@ def example_create_transaction():
         'companyCode': None,
         'currencyCode': 'USD',
         'customerCode': 'ABC',
-        'date': '2017-04-12',
+        'date': '2018-01-01',
         'description': 'Yarn',
         'lines': [{'amount': 100,
                    'description': 'Yarn',
                    'itemCode': 'Y0001',
                    'number': '1',
-                   'quantity': 1,
+                   'quantity': 4,
                    'taxCode': 'PS081282'}],
-        'purchaseOrderNo': '2017-04-12-001',
+        'purchaseOrderNo': '2018-01-01-001',
         'type': 'SalesInvoice'}
 
     return example_client.create_transaction(tax_document)
@@ -65,5 +66,6 @@ def example_create_transaction():
 
 if __name__ == '__main__':
     response = example_create_transaction()
-    print(response.json()['totalTaxCalculated'])
-    # import pdb; pdb.set_trace()
+    print(response)
+    # print(response.json()['totalTaxCalculated'])
+    import pdb; pdb.set_trace()
