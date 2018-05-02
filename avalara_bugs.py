@@ -67,5 +67,3 @@ def example_create_transaction():
 if __name__ == '__main__':
     response = example_create_transaction()
     print(response)
-    # print(response.json()['totalTaxCalculated'])
-    import pdb; pdb.set_trace()
